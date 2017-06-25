@@ -2,7 +2,11 @@ import os
 import sqlite3
 import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, session
+from flask_wtf.csrf import CSRFProtect
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = os.urandom(24)
+csrf = CSRFProtect(app)
 
 @app.route('/')
 def show_entries():
